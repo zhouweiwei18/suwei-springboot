@@ -1,10 +1,9 @@
 package com.mall.manager.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.mall.manager.service.TbItemService;
 import com.mall.pojo.TbItem;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 /**
  * @author weiwei
@@ -14,8 +13,8 @@ import javax.annotation.Resource;
 @RequestMapping("/item")
 public class TbItemController {
 
-    @Resource
-    TbItemService tbItemService;
+    @Reference
+    private TbItemService tbItemService;
 
 
     @GetMapping("/{itemId}")

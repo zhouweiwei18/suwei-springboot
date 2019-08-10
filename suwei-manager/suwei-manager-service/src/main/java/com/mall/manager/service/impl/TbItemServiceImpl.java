@@ -1,10 +1,10 @@
 package com.mall.manager.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.mall.manager.mapper.TbItemMapper;
 import com.mall.manager.service.TbItemService;
 import com.mall.pojo.TbItem;
 import com.mall.pojo.TbItemExample;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;

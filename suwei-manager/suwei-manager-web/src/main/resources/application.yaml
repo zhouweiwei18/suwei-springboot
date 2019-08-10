@@ -1,0 +1,14 @@
+#tomcat conf
+server:
+  port: 8081
+
+#dubbo conf
+dubbo:
+  application:
+    name: suwei-manager-web
+  registry:
+    address: zookeeper://47.103.70.199:2181
+
+
+
+

@@ -17,7 +17,7 @@ public class ManagerServiceApplication {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println("------------------------第二个SpringBoot加载了-------------------------------");
+        System.out.println("-------------------------加载服务-----------------------------");
 
         new SpringApplicationBuilder()
                 .sources(ManagerServiceApplication.class)

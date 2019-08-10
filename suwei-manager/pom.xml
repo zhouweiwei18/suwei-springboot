@@ -16,7 +16,6 @@
         <module>suwei-manager-dao</module>
         <module>suwei-manager-pojo</module>
         <module>suwei-manager-service</module>
-        <module>suwei-manager-web</module>
         <module>suwei-manager-interface</module>
     </modules>
 

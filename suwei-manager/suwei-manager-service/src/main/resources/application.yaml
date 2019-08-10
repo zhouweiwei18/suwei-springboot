@@ -9,3 +9,14 @@ spring:
     url: jdbc:mysql://localhost:3306/e3mall
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+
+dubbo:
+  application:
+    name: suwei-manager
+    timeout: 600000
+  registry:
+    address: zookeeper://47.103.70.199:2181
+  scan:
+    basePackages: com.mall.manager.service
+  protocol:
+    port: 20880
