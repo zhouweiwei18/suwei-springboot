@@ -1,0 +1,6 @@
+# Project exclude paths
+/suwei-manager/suwei-manager-dao/target/
+/suwei-manager/suwei-manager-interface/target/
+/suwei-manager/suwei-manager-pojo/target/
+/suwei-manager/suwei-manager-service/target/
+/suwei-manager/suwei-manager-web/target/

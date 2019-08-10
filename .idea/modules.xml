@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/suwei-common/suwei-common.iml" filepath="$PROJECT_DIR$/suwei-common/suwei-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager-dao/suwei-manager-dao.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager-dao/suwei-manager-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager-interface/suwei-manager-interface.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager-interface/suwei-manager-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager-pojo/suwei-manager-pojo.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager-pojo/suwei-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager-service/suwei-manager-service.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager-service/suwei-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-manager/suwei-manager-web/suwei-manager-web.iml" filepath="$PROJECT_DIR$/suwei-manager/suwei-manager-web/suwei-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suwei-parent/suwei-parent.iml" filepath="$PROJECT_DIR$/suwei-parent/suwei-parent.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="suwei-manager-web" />
+        <module name="suwei-common" />
+        <module name="suwei-manager-dao" />
+        <module name="suwei-manager-pojo" />
+        <module name="suwei-manager-interface" />
+        <module name="suwei-manager-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="suwei-common" target="1.7" />
+      <module name="suwei-manager" target="1.8" />
+      <module name="suwei-manager-dao" target="1.8" />
+      <module name="suwei-manager-interface" target="1.8" />
+      <module name="suwei-manager-pojo" target="1.7" />
+      <module name="suwei-manager-service" target="1.8" />
+      <module name="suwei-manager-web" target="1.8" />
+      <module name="suwei-parent" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="suwei-common" options="-parameters" />
+      <module name="suwei-manager-dao" options="-parameters" />
+      <module name="suwei-manager-interface" options="-parameters" />
+      <module name="suwei-manager-pojo" options="-parameters" />
+      <module name="suwei-manager-service" options="-parameters" />
+      <module name="suwei-manager-web" options="-parameters" />
+    </option>
+  </component>
+</project>
