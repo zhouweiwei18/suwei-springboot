@@ -35,4 +35,14 @@ public class TbItemServiceImpl implements TbItemService {
         }
         return null;
     }
+
+    @Override
+    public List<TbItem> getItemList() {
+
+        TbItemExample example = new TbItemExample();
+
+        List<TbItem> list = itemMapper.selectByExample(example);
+
+        return list;
+    }
 }

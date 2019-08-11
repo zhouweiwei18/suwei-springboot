@@ -9,6 +9,25 @@ dubbo:
   registry:
     address: zookeeper://47.103.70.199:2181
 
+#ftl conf
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+  freemarker:
+    request-context-attribute: ctx  #项目访问
+    allow-request-override: false
+    cache: false
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html; charset=utf-8
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+
 
 
 
