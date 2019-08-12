@@ -15,7 +15,7 @@ dubbo:
     name: suwei-manager
     timeout: 600000
   registry:
-    address: zookeeper://47.103.70.199:2181
+    address: zookeeper://192.168.184.128:2181
   scan:
     basePackages: com.mall.manager.service
   protocol:
