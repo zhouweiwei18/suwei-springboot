@@ -1,0 +1,10 @@
+<link rel="stylesheet"
+      href="${ctx.contextPath}/assets/css/bootstrap.min.css" />
+<link rel="stylesheet"
+      href="${ctx.contextPath}/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+      href="${ctx.contextPath}/assets/css/ace.min.css" />
+<link rel="stylesheet"
+      href="${ctx.contextPath}/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+      href="${ctx.contextPath}/assets/css/ace-skins.min.css" />
