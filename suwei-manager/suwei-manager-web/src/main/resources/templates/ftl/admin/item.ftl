@@ -16,11 +16,11 @@
 <body>
 
 <div id="toolbar">
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">添加</button>
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">编辑</button>
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">删除</button>
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">上架</button>
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">下架</button>
+    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default"><a href="${ctx.contextPath}/itemPage/item-add">添加</a></button>
+    <button id="btn_edit" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">编辑</button>
+    <button id="btn_del" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">删除</button>
+    <button id="btn_sj" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">上架</button>
+    <button id="btn_xj" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">下架</button>
 
 </div>
 <!--显示表格的内容-->
@@ -191,6 +191,8 @@
             }*/]
         })
     })
+
+    //做页面的跳转
 </script>
 
 </body>
