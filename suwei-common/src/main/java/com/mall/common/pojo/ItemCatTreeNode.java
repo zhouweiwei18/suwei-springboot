@@ -11,17 +11,22 @@ import java.util.List;
  */
 public class ItemCatTreeNode implements Serializable {
 
-    private long  id;//主键
+    private Integer  id;//主键
     private String name;//名字
-    private boolean open;//true:展开 false:折叠
-    private Integer parentTId;//父节点
-    private List<ItemCatTreeNode> children = new ArrayList<>();//子节点
+    //private String url;//访问地址
+    private boolean open;//true:展开  false:折叠
+    private boolean isParent;
+    //private Integer parentTId;//父节点
+    //private List<ItemCatTreeNode> children = new ArrayList<>();//子节点
+    //private boolean checked;//true:被选中   false:未选中
+    //private String icon;//图标
 
-    public long getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,20 +46,12 @@ public class ItemCatTreeNode implements Serializable {
         this.open = open;
     }
 
-    public Integer getParentTId() {
-        return parentTId;
+    public boolean getIsParent() {
+        return isParent;
     }
 
-    public void setParentTId(Integer parentTId) {
-        this.parentTId = parentTId;
-    }
-
-    public List<ItemCatTreeNode> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<ItemCatTreeNode> children) {
-        this.children = children;
+    public void setIsParent(boolean parent) {
+        isParent = parent;
     }
 
     @Override
@@ -63,8 +60,7 @@ public class ItemCatTreeNode implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", open=" + open +
-                ", parentTId=" + parentTId +
-                ", children=" + children +
+                ", isParent=" + isParent +
                 '}';
     }
 }

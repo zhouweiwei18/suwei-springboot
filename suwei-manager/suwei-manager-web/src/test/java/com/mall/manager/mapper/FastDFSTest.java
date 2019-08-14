@@ -43,7 +43,7 @@ public class FastDFSTest {
     @Test
     public void testFastDfsClient() throws Exception {
         FastDFSClient fastDFSClient = new FastDFSClient("E:/IDEA_Project/suwei-manager/suwei-manager-web/src/main/resources/conf/client.conf");
-        String file = fastDFSClient.uploadFile("D:/Picture/cat.jpg");
+        String file = fastDFSClient.uploadFile("D:/Picture/5ae686cfc8cfb72e8f0322fc.jpg");
         System.out.println(file);
     }
 }

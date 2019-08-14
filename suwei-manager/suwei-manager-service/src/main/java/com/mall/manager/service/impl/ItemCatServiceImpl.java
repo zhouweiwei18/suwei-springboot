@@ -32,13 +32,15 @@ public class ItemCatServiceImpl implements ItemCatService {
         criteria.andParentIdEqualTo(parentId);
         List<TbItemCat> list = itemCatMapper.selectByExample(example);
 
-        // 2、转换成EasyUITreeNode列表。
+        // 2、转换成ItemCatTreeNode列表。
         List<ItemCatTreeNode> resultList = new ArrayList<>();
+
         for (TbItemCat tbItemCat : list) {
             ItemCatTreeNode node = new ItemCatTreeNode();
-            node.setId(tbItemCat.getId());
+            node.setId(tbItemCat.getId().intValue());
             node.setName(tbItemCat.getName());
-            node.setParentTId(tbItemCat.getIsParent()?0:1);
+            //判断当前的商品类目是否是父节点
+            node.setIsParent(tbItemCat.getIsParent());
             //添加到列表
             resultList.add(node);
         }

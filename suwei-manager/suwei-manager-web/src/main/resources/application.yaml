@@ -15,6 +15,12 @@ spring:
     encoding:
       force: true
       charset: UTF-8
+  #图片上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1MB
+      max-request-size: 10MB
   freemarker:
     request-context-attribute: ctx  #项目访问
     allow-request-override: false

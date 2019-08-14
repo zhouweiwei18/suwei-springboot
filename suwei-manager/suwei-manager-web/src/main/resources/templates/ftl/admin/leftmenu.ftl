@@ -14,7 +14,7 @@
         </a>
         <ul class="submenu">
             <li>
-                <a href="javascript:void(0)" dataUrl="">
+                <a href="javascript:void(0)" dataUrl="${ctx.contextPath}/itemPage/item-add">
                     <i class="icon-double-angle-right"></i>
                     新增商品
                 </a>
