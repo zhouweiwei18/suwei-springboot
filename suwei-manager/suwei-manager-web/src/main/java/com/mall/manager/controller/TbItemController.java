@@ -1,6 +1,7 @@
 package com.mall.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.mall.common.pojo.SuWeiResult;
 import com.mall.manager.service.TbItemService;
 import com.mall.pojo.TbItem;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,15 @@ public class TbItemController {
         List<TbItem> list = tbItemService.getItemList();
 
         return list;
+    }
+
+    //添加商品
+    @RequestMapping("/item/save")
+    public SuWeiResult getItemList(TbItem item, String desc) {
+
+        SuWeiResult result = tbItemService.addItem(item, desc);
+
+        return result;
     }
 
     //跳转指定页面(通用)

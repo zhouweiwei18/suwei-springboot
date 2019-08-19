@@ -1,5 +1,6 @@
 package com.mall.manager.service;
 
+import com.mall.common.pojo.SuWeiResult;
 import com.mall.pojo.TbItem;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface TbItemService {
 
     //查询商品所有信息
     List<TbItem> getItemList();
+
+    //添加商品
+    SuWeiResult addItem(TbItem item, String desc);
 }

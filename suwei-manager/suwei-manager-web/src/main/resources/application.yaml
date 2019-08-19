@@ -7,7 +7,7 @@ dubbo:
   application:
     name: suwei-manager-web
   registry:
-    address: zookeeper://192.168.25.128:2181
+    address: zookeeper://192.168.25.129:2181
 
 #ftl conf
 spring:
@@ -33,7 +33,3 @@ spring:
     expose-spring-macro-helpers: false
     suffix: .ftl
     template-loader-path: classpath:/templates
-
-
-
-

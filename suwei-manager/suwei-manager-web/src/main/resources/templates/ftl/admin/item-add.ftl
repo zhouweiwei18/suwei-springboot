@@ -8,42 +8,44 @@
 <#include "../common/commonjs.ftl">
 <body>
 <div style="padding:10px 10px 10px 10px">
-    <form class="form-horizontal" style="margin-top: 10px;width:50%" method="post">
+    <form class="form-horizontal" style="margin-top: 10px;width:50%" method="post" id="itemAddForm">
         <div class="form-group">
             <label class="col-sm-2 control-label">商品类目:</label>
             <div class="col-sm-10 form-inline">
                 <button type="button" class="btn btn-default" id="selectItemCat">选择类目</button>
-                <input type="text" style="" id="selectedItemCat" class="form-control" disabled>
+                <input type="text" id="selectedItemCat" class="form-control" disabled>
+                <input type="hidden" name="cid" id="selectedItemCat2" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">商品标题:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <input type="text" name="title" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">商品卖点:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <textarea name="sellPoint" rows="3" class="form-control"></textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">商品价格:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <input type="number" name="priceView" class="form-control">
+                <input type="hidden" name="price" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">库存数量:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <input type="number" name="num" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">条形码:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <input type="number" name="barcode" class="form-control">
             </div>
         </div>
         <div class="form-group">
@@ -51,21 +53,20 @@
             <div class="col-sm-10 form-inline">
                 <button type="button" id="picFileUpload" class="btn btn-default">上传图片</button>
                 <input type="hidden" name="image"/>
-                <img src="http://192.168.25.133/group1/M00/00/00/wKgZhV1UMTuAAahZAAS9l-w-A0M143.jpg" class="img-responsive" alt="Responsive image">
-                <img src="http://192.168.25.133/group1/M00/00/00/wKgZhV1UMTuAAahZAAS9l-w-A0M143.jpg" class="img-responsive" alt="Responsive image">
-                <img src="http://192.168.25.133/group1/M00/00/00/wKgZhV1UMTuAAahZAAS9l-w-A0M143.jpg" class="img-responsive" alt="Responsive image">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label">商品描述:</label>
-            <textarea class="form-control" style="margin-left:125px;width: 60%" rows="3"></textarea>
+            <div class="col-sm-10 form-inline">
+                <textarea  id="desc" name="desc"></textarea>
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-default">提交</button>
-                <button type="button" class="btn btn-default">重置</button>
+                <button type="button" class="btn btn-default" onclick="submitForm()">提交</button>
+                <button type="button" class="btn btn-default" onclick="clearForm()">重置</button>
             </div>
         </div>
     </form>
@@ -113,15 +114,15 @@
                     zTreeObj = $.fn.zTree.init($("#treeDemo"), setting,null);
                 });
             })
-
-
     })
 
     //选中树的子节点
     function zTreeOnClick(event, treeId, treeNode) {
-        //alert(treeNode.tId + ", " + treeNode.name);
+
+        //alert(treeNode.id + ", " + treeNode.name);
         //获取页面输入框
         $("#selectedItemCat").val(treeNode.name);
+        $("#selectedItemCat2").val(treeNode.id);
         $("#closeBtn").click();
     };
 
@@ -129,13 +130,39 @@
     var itemAddEditor ;
     //页面初始化完毕后执行此方法
     $(function(){
+        //创建富文本编辑器
+        itemAddEditor = E3.createEditor("#itemAddForm [name=desc]");
+
         //初始化类目选择和图片上传器
         E3.init({fun:function(node){
-            }});
-    });
-</script>
 
- <script>
+        }});
+    });
+
+    //提交表单
+    function submitForm(){
+        //有效性验证
+        //校验(暂且没做)
+        //取商品价格，单位为“分”
+        $("#itemAddForm [name=price]").val(eval($("#itemAddForm [name=priceView]").val()) * 100);
+        //同步文本框中的商品描述
+        itemAddEditor.sync();
+
+        $.post("/item/save",$("#itemAddForm").serialize(), function(data){
+            if(data.status == 200){
+
+                alert("添加成功！")
+
+            }
+        });
+    }
+
+    function clearForm(){
+        $("#itemAddForm")[0].reset();
+        $("#form-inline").remove();
+    }
+</script>
+<script>
      var E3 = {
          // 编辑器参数
          kingEditorParams : {
@@ -151,21 +178,19 @@
              // 初始化图片上传组件
              this.initPicUpload(data);
          },
+
          // 初始化图片上传组件
          initPicUpload : function(data){
              $("#picFileUpload").each(function(i,e){
                  var _ele = $(e);
-                 _ele.siblings("div.pics").remove();
-                 _ele.after('\
-    			<div class="pics">\
-        			<ul></ul>\
-        		</div>');
+                 _ele.siblings("#form-inline").remove();
+                 _ele.after('<div class="col-sm-11 form-inline" style="margin-top: 5px;height: auto;" id="form-inline"></div>');
                  // 回显图片
                  if(data && data.pics){
                      var imgs = data.pics.split(",");
                      for(var i in imgs){
                          if($.trim(imgs[i]).length > 0){
-                             _ele.siblings(".pics").find("ul").append("<li><a href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a></li>");
+                             _ele.siblings("#form-inline").append("<a href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"'/></a>");
                          }
                      }
                  }
@@ -180,7 +205,7 @@
                                  var imgArray = [];
                                  KindEditor.each(urlList, function(i, data) {
                                      imgArray.push(data.url);
-                                     form.find(".pics ul").append("<li><a href='"+data.url+"' target='_blank'><img src='"+data.url+"' class=\"img-responsive\" /></a></li>");
+                                     form.find("#form-inline").append("<a href='"+data.url+"' target='_blank'><img src='"+data.url+"' class='img-rounded' style='float: left;width: 60px;'/></a>");
                                  });
                                  form.find("[name=image]").val(imgArray.join(","));
                                  editor.hideDialog();
@@ -190,6 +215,9 @@
                  });
              });
          },
+         createEditor : function(select){
+             return KindEditor.create(select, E3.kingEditorParams);
+         }
      };
  </script>
 </body>
