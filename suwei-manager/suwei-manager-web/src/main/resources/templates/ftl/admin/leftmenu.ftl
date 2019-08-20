@@ -31,18 +31,6 @@
                     规格参数
                 </a>
             </li>
-            <#--<li>
-                <a href="jquery-ui.html">
-                    <i class="icon-double-angle-right"></i>
-                    复制房源
-                </a>
-            </li>
-            <li>
-                <a href="nestable-list.html">
-                    <i class="icon-double-angle-right"></i>
-                    账号设置
-                </a>
-            </li>-->
         </ul>
     </li>
     <li>
@@ -54,15 +42,15 @@
         </a>
         <ul class="submenu">
             <li>
-                <a href="javascript:void(0)" dataUrl="">
+                <a href="javascript:void(0)" dataUrl="${ctx.contextPath}/contentPage/content-category">
                     <i class="icon-double-angle-right"></i>
                     内容分类管理
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" dataUrl="">
+                <a href="javascript:void(0)" dataUrl="${ctx.contextPath}/contentPage/content">
                     <i class="icon-double-angle-right"></i>
-                    内容引擎
+                    内容管理
                 </a>
             </li>
         </ul>

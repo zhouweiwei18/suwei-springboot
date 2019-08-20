@@ -6,6 +6,9 @@ server:
 dubbo:
   application:
     name: suwei-manager-web
+    qos-port: 22222
+    qos-accept-foreign-ip: false
+    qos-enable: true
   registry:
     address: zookeeper://192.168.25.129:2181
 

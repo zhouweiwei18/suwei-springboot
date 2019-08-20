@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PortalWebApplicationStarter {
     public static void main(String[] args) {
+        System.out.println("-------------------------前台页面启动-----------------------------");
         SpringApplication.run(PortalWebApplicationStarter.class, args);
     }
 }

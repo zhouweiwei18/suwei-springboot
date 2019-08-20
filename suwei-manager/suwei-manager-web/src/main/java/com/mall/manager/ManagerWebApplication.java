@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ManagerWebApplication {
 
     public static void main(String[] args) {
-
+        System.out.println("-------------------------后台管理-----------------------------");
         SpringApplication.run(ManagerWebApplication.class, args);
     }
 

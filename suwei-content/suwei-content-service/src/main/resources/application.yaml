@@ -1,0 +1,24 @@
+mybatis:
+  config-location: classpath:mybatis/SqlMapConfig.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/e3mall
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+dubbo:
+  application:
+    name: suwei-content
+    qos-port: 33333
+    qos-accept-foreign-ip: false
+    qos-enable: true
+  registry:
+    address: zookeeper://192.168.25.129:2181
+  scan:
+    basePackages: com.mall.content.service
+  protocol:
+    port: 20881
