@@ -1,0 +1,3 @@
+#tomcat conf
+server:
+  port: 8082

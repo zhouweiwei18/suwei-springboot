@@ -11,6 +11,8 @@
     <modules>
         <module>../suwei-common</module>
         <module>../suwei-manager</module>
+        <module>../suwei-portal-web</module>
+        <module>../suwei-content</module>
     </modules>
 
     <!--定义SpringBoot依赖父工程-->
@@ -145,7 +147,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 
 </project>
