@@ -3,4 +3,4 @@
 <link href="${ctx.contextPath}/plugin/css/bootstrap-table.css" rel="stylesheet">
 <link href="${ctx.contextPath}/plugin/css/bootstrap-table-pagejump.css" rel="stylesheet">
 <link rel="stylesheet" href="${ctx.contextPath}/plugin/kindeditor/themes/default/default.css" />
-<link rel="stylesheet" href="${ctx.contextPath}/plugin/ztree/css/zTreeStyle/zTreeStyle.css"> </head>
+<link rel="stylesheet" href="${ctx.contextPath}/plugin/ztree/css/metroStyle/metroStyle.css"> </head>

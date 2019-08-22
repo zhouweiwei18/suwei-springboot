@@ -6,3 +6,6 @@
 <script src="${ctx.contextPath}/plugin/kindeditor/kindeditor.js"></script>
 <script src="${ctx.contextPath}/plugin/kindeditor/lang/zh_CN.js"></script>
 <script src="${ctx.contextPath}/plugin/ztree/js/jquery.ztree.all.min.js"></script>
+<script src="${ctx.contextPath}/plugin/ztree/js/jquery.ztree.core.js"></script>
+<script src="${ctx.contextPath}/plugin/ztree/js/jquery.ztree.excheck.js"></script>
+<script src="${ctx.contextPath}/plugin/ztree/js/jquery.ztree.exedit.js"></script>

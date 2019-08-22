@@ -6,15 +6,92 @@
     <!--引入-->
     <#include "../common/commoncss.ftl">
     <#include "../common/commonjs.ftl">
+    <style type="text/css">
+        .ztree li span.button.add {
+            margin-left: 2px;
+            margin-right: -1px;
+            background-position: -144px 0;
+            vertical-align: top;
+            *vertical-align: middle
+        }
+    </style>
 </head>
 <body>
+
 <div id="toolbar">
-    <button id="btn_add" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default"><a href="${ctx.contextPath}/">添加</a></button>
-    <button id="btn_edit" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">编辑</button>
-    <button id="btn_del" type="submit" style="float: left;margin-left: 5px;" class="btn btn-default">删除</button>
+    <button id="btn_add" type="button" onclick="toContentPage()" style="float: left;margin-left: 5px;" class="btn btn-default">添加</button>
+    <button id="btn_edit" type="button" style="float: left;margin-left: 5px;" class="btn btn-default">编辑</button>
+    <button id="btn_del" type="button" style="float: left;margin-left: 5px;" class="btn btn-default">删除</button>
 </div>
-<!--显示表格的内容-->
-<table id="tb_admin" style='table-layout:fixed;'></table>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="zTreeDemoBackground left">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <!--显示表格的内容-->
+        <table id="tb_admin" style='table-layout:fixed;'></table>
+    </div>
+</div>
+
+<SCRIPT type="text/javascript">
+
+    var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        edit: {
+            enable: true
+        },
+        async: {
+            enable: true,
+            url: "${ctx.contextPath}/content/category/list",
+            autoParam: ["id"]
+        }
+    };
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting, null);
+    });
+
+    var newCount = 1;
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+            + "' title='add node' onfocus='this.blur();'></span>";
+        sObj.after(addStr);
+        var btn = $("#addBtn_"+treeNode.tId);
+        if (btn) btn.bind("click", function(){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+            return false;
+        });
+    };
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_"+treeNode.tId).unbind().remove();
+    };
+
+    //跳转到对应页面(添加)
+    function toContentPage() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = zTree.getSelectedNodes()[0];
+        alert(nodes.id+"----"+nodes.name);
+        location.href="${ctx.contextPath}/content/toAdd/"+nodes.id;//Restful风格
+    }
+</SCRIPT>
 
 <script type="text/javascript">
     $(function(){

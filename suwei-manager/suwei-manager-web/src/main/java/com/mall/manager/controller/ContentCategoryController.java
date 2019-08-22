@@ -2,10 +2,9 @@ package com.mall.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.mall.common.pojo.ItemCatTreeNode;
+import com.mall.common.pojo.SuWeiResult;
 import com.mall.content.service.ContentCategoryService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,6 +22,16 @@ public class ContentCategoryController {
     @RequestMapping("/content/category/list")
     public List<ItemCatTreeNode> getContentCatList(@RequestParam(value="id", defaultValue="0") Long parentId){
         return contentCategoryService.getContentCategoryList(parentId);
+    }
+
+    @RequestMapping("/content/category/create")
+    public SuWeiResult createCategory(Long parentId, String name) {
+        return contentCategoryService.addContentCategory(parentId, name);
+    }
+
+    @RequestMapping(value = "/content/category/update",method= RequestMethod.POST)
+    public SuWeiResult updateCategory(Long id, String name) {
+        return contentCategoryService.updateContentCategory(id, name);
     }
 
 }

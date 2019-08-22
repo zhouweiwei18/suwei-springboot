@@ -13,8 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class ContentController {
 
+    @GetMapping("/content/toAdd/{id}")
+    public ModelAndView toAdd(ModelAndView mv, @PathVariable long id){
 
+        mv.setViewName("ftl/admin/content-add");
+        mv.addObject("id",id);
 
+        System.out.println(id);
+        return mv;
+    }
 
 
     //跳转指定页面(通用)

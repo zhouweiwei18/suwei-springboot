@@ -2,6 +2,7 @@ package com.mall.content.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.mall.common.pojo.ItemCatTreeNode;
+import com.mall.common.pojo.SuWeiResult;
 import com.mall.content.service.ContentCategoryService;
 import com.mall.manager.mapper.TbContentCategoryMapper;
 import com.mall.pojo.TbContentCategory;
@@ -9,6 +10,7 @@ import com.mall.pojo.TbContentCategoryExample;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,4 +50,49 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
         return result;
     }
+
+    @Override
+    public SuWeiResult addContentCategory(long parentId, String name) {
+
+            // 1、接收两个参数：parentId、name
+            // 2、向tb_content_category表中插入数据。
+            // a)创建一个TbContentCategory对象
+            TbContentCategory tbContentCategory = new TbContentCategory();
+            // b)补全TbContentCategory对象的属性
+            tbContentCategory.setIsParent(false);
+            tbContentCategory.setName(name);
+            tbContentCategory.setParentId(parentId);
+            //排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
+            tbContentCategory.setSortOrder(1);
+            //状态。可选值:1(正常),2(删除)
+            tbContentCategory.setStatus(1);
+            tbContentCategory.setCreated(new Date());
+            tbContentCategory.setUpdated(new Date());
+            // c)向tb_content_category表中插入数据
+            tbContentCategoryMapper.insert(tbContentCategory);
+            // 3、判断父节点的isparent是否为true，不是true需要改为true。
+            TbContentCategory parentNode = tbContentCategoryMapper.selectByPrimaryKey(parentId);
+            if (!parentNode.getIsParent()) {
+                parentNode.setIsParent(true);
+                //更新父节点
+                tbContentCategoryMapper.updateByPrimaryKey(parentNode);
+            }
+            // 4、需要主键返回。
+            // 5、返回SuWeiResult，其中包装TbContentCategory对象
+            return SuWeiResult.ok(tbContentCategory);
+        }
+
+    @Override
+    public SuWeiResult updateContentCategory(Long id, String name) {
+
+        //创建一个content_category对象
+        TbContentCategory category = new TbContentCategory();
+        category.setName(name);
+        category.setId(id);
+
+        tbContentCategoryMapper.updateByPrimaryKeySelective(category);
+
+        return SuWeiResult.ok();
+    }
+
 }

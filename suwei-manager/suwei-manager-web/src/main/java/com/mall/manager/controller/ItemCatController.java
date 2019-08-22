@@ -3,10 +3,12 @@ package com.mall.manager.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.mall.common.pojo.ItemCatTreeNode;
 import com.mall.manager.service.ItemCatService;
+import com.mall.pojo.TbItem;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
