@@ -1,3 +1,13 @@
 #tomcat conf
 server:
   port: 8082
+
+#dubbo conf
+dubbo:
+  application:
+    name: suwei-portal-web
+    qos-port: 44444
+    qos-accept-foreign-ip: false
+    qos-enable: true
+  registry:
+    address: zookeeper://192.168.25.129:2181

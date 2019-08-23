@@ -40,7 +40,7 @@
             <label class="col-sm-2 control-label">商品图片:</label>
             <div class="col-sm-10 form-inline">
                 <button type="button" id="onePicUpload" class="btn btn-default">上传图片</button>
-                <input type="hidden" name="image"/>
+                <input type="hidden" name="pic" />
             </div>
         </div>
 
@@ -82,9 +82,7 @@
 
         $.post("/content/save",$("#contentAddForm").serialize(), function(data){
             if(data.status == 200){
-
                 alert("添加成功！")
-
             }
         });
     }

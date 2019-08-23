@@ -1,9 +1,12 @@
 package com.mall.manager.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.mall.common.pojo.SuWeiResult;
+import com.mall.content.service.ContentService;
+import com.mall.pojo.TbContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -12,6 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class ContentController {
+
+    @Reference
+    private ContentService contentService;
+
+    @RequestMapping(value="/content/save", method= RequestMethod.POST)
+    @ResponseBody
+    public SuWeiResult addContent(TbContent content) {
+        //调用服务把内容数据保存到数据库
+        SuWeiResult result = contentService.addContent(content);
+        return result;
+    }
+
 
     @GetMapping("/content/toAdd/{id}")
     public ModelAndView toAdd(ModelAndView mv, @PathVariable long id){
