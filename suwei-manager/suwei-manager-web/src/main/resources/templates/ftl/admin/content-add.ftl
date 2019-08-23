@@ -20,13 +20,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">内容子标题:</label>
             <div class="col-sm-10">
-                <input type="text" name="title" class="form-control">
+                <input type="text" name="subTitle" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">内容描述:</label>
             <div class="col-sm-10">
-                <textarea name="sellPoint" rows="3" class="form-control"></textarea>
+                <textarea name="titleDesc" rows="3" class="form-control"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">商品描述:</label>
             <div class="col-sm-10 form-inline">
-                <textarea  id="desc" name="desc"></textarea>
+                <textarea name="content"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -65,7 +65,7 @@
     //页面初始化完毕后执行此方法
     $(function(){
         //创建富文本编辑器
-        contentAddEditor = E3.createEditor("#contentAddForm [name=desc]");
+        contentAddEditor = E3.createEditor("#contentAddForm [name=content]");
 
         //初始化类目选择和图片上传器
         E3.initOnePicUpload();

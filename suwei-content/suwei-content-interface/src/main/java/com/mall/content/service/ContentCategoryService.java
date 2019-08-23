@@ -18,4 +18,7 @@ public interface ContentCategoryService {
 
     //节点重命名
     SuWeiResult updateContentCategory(Long id, String name);
+
+    //删除节点
+    SuWeiResult deleteContentCategory(Long id);
 }

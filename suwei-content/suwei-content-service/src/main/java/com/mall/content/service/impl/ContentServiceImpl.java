@@ -43,4 +43,14 @@ public class ContentServiceImpl implements ContentService {
             contentMapper.insert(content);
             return SuWeiResult.ok();
     }
+
+    @Override
+    public List<TbContent> queryContent() {
+
+        TbContentExample example = new TbContentExample();
+
+        List<TbContent> list = contentMapper.selectByExample(example);
+
+        return list;
+    }
 }

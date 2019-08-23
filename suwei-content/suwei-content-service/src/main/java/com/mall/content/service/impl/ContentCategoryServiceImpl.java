@@ -53,7 +53,6 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Override
     public SuWeiResult addContentCategory(long parentId, String name) {
-
             // 1、接收两个参数：parentId、name
             // 2、向tb_content_category表中插入数据。
             // a)创建一个TbContentCategory对象
@@ -93,6 +92,44 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         tbContentCategoryMapper.updateByPrimaryKeySelective(category);
 
         return SuWeiResult.ok();
+    }
+
+    /**
+     * 根据id删除节点
+     * @param id
+     * @return
+     */
+    @Override
+    public SuWeiResult deleteContentCategory(Long id) {
+        //判断该节点是否是父节点，是父节点的话就不让删除
+        TbContentCategory contentCategory = tbContentCategoryMapper.selectByPrimaryKey(id);
+        Boolean isParent = contentCategory.getIsParent();
+        if (isParent){
+            //不让删除
+            return SuWeiResult.build(500,"the node is parentNode");
+        }else{
+            //删除该节点
+            tbContentCategoryMapper.deleteByPrimaryKey(id);
+            //查询父节点下子节点的个数，如果没有子节点，将父节点改为子节点
+            TbContentCategoryExample example = new TbContentCategoryExample();
+            TbContentCategoryExample.Criteria criteria = example.createCriteria();
+            criteria.andParentIdEqualTo(contentCategory.getParentId());
+            //查询
+            List<TbContentCategory> list = tbContentCategoryMapper.selectByExample(example);
+            if(list.size()==0){//说明父节点下没有子节点了
+                //将父节点改为子节点
+                TbContentCategory category = new TbContentCategory();
+                category.setId(contentCategory.getParentId());
+                category.setIsParent(false);
+                //更新父亲节点
+                tbContentCategoryMapper.updateByPrimaryKeySelective(category);
+                return SuWeiResult.ok();
+            }
+
+            //父亲节点下还有子节点
+            return SuWeiResult.ok();
+        }
+
     }
 
 }

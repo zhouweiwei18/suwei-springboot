@@ -15,4 +15,7 @@ public interface ContentService {
 
     //添加内容
     SuWeiResult addContent(TbContent content);
+
+    //查询Content表
+    List<TbContent> queryContent();
 }

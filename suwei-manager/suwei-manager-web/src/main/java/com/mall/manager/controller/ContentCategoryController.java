@@ -34,4 +34,9 @@ public class ContentCategoryController {
         return contentCategoryService.updateContentCategory(id, name);
     }
 
+    @RequestMapping(value = "/content/category/delete",method= RequestMethod.POST)
+    public SuWeiResult deleteCategory(Long id) {
+        return contentCategoryService.deleteContentCategory(id);
+    }
+
 }

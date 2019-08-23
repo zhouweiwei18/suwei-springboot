@@ -74,20 +74,17 @@
         className = (className === "dark" ? "" : "dark");
         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
         zTree.selectNode(treeNode);
-
         var oFlag = confirm("确认删除 节点 -- " + treeNode.name + " 吗？");//这里前后台交互
         if (oFlag) {
-            /*$.ajax({ //请求后台
-                type: 'post',
-                url: "",//删除节点的url
-                data: null,
-                timeout: 1000, //超时时间设置，单位毫秒
-                dataType: 'json',
-                success: function (res) {
-                    alert(res);
+            $.post("/content/category/delete", {id: treeNode.id},function (data) {
+                if(data.status==200){
+                    alert("删除成功");
+                    return true;
+                }else{
+                    alert(data.msg);//是父节点
                 }
-            })*/
-            return false;
+                return false;
+            });
         } else {
             return false;
         }
@@ -113,11 +110,11 @@
     function onRename(e, treeId, treeNode, isCancel) {
         alert(treeNode.id + ", " + treeNode.name);
         //重命名(同步到数据库)
-        $.post("/content/category/update",{id:treeNode.id,name:treeNode.name});
+        $.post("/content/category/update", {id: treeNode.id, name: treeNode.name});
     }
 
     function showRemoveBtn(treeId, treeNode) {
-        return !treeNode.isFirstNode;
+        return !treeNode.isParent;
     }
 
     function showRenameBtn(treeId, treeNode) {
@@ -145,13 +142,17 @@
         if (btn) btn.bind("click", function () {
                 var zTree = $.fn.zTree.getZTreeObj("treeDemo");
                 var newName = "new node" + (newCount++);
-                zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: newName});
                 //同步到数据库(后台交互)
                 alert("添加节点");
                 // 新增节点
                 $.post("/content/category/create", {parentId: treeNode.id, name: newName}, function (data) {
                     if (data.status == 200) {
-                         alert("success");
+                        //给新增节点补全数据库的id
+                        //alert(data.data.id);
+                        //alert(data.data.name);
+                        //页面上添加
+                        zTree.addNodes(treeNode, {id: data.data.id, pId: treeNode.id, name: newName});
+                        alert("success");
                     } else {
                         alert("创建" + newName + "分类失败!");
                     }
