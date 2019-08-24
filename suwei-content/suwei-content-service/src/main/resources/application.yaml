@@ -9,10 +9,35 @@ spring:
     url: jdbc:mysql://localhost:3306/e3mall
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+#redis conf
+  redis:
+    timeout: 5000
+# redis-single
+    host: 192.168.25.130
+    port: 6379
+# redis-cluster
+#    cluster:
+#      max-redirects: 3
+#      nodes:
+#        - 192.168.25.130:7001
+#        - 192.168.25.130:7002
+#        - 192.168.25.130:7003
+#        - 192.168.25.130:7004
+#        - 192.168.25.130:7005
+#        - 192.168.25.130:7006
+#    lettuce:
+#      pool:
+#        max-active: 100
+#        max-idle: 100
+#        min-idle: 50
+#        max-wait: 6000
 
+#dubbo conf
 dubbo:
   application:
     name: suwei-content
+    #debug 调试超时设置
+    timeout: 1200000
     qos-port: 33333
     qos-accept-foreign-ip: false
     qos-enable: true

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ContentService {
 
-    List<TbContent> getContentListByCid(long cid);
+    List<TbContent> getContentListByCid(Long cid);
 
     //添加内容
     SuWeiResult addContent(TbContent content);
