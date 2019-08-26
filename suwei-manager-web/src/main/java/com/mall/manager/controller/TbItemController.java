@@ -46,13 +46,13 @@ public class TbItemController {
     }
 
     //跳转指定页面(通用)
-    @GetMapping("/itemPage/{info}")
+    /*@GetMapping("/itemPage/{info}")
     public ModelAndView sendDept(ModelAndView mv,@PathVariable String info){
 
         mv.setViewName("ftl/admin/"+info);
 
         return mv;
-    }
+    }*/
 
     //到首页面
     @RequestMapping("/")

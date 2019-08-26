@@ -1,0 +1,25 @@
+mybatis:
+  config-location: classpath:mybatis/SqlMapConfig.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/e3mall
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    solr:
+      host: http://192.168.25.129:8080/solr/collection1
+
+dubbo:
+  application:
+    name: suwei-search
+    timeout: 1200000
+  registry:
+    address: zookeeper://192.168.25.129:2181
+  scan:
+    basePackages: com.mall.search.service
+  protocol:
+    port: 20882

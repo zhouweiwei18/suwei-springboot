@@ -51,11 +51,11 @@ public class ContentController {
 
 
     //跳转指定页面(通用)
-    @GetMapping("/contentPage/{info}")
+    /*@GetMapping("/contentPage/{info}")
     public ModelAndView sendDept(ModelAndView mv, @PathVariable String info) {
 
         mv.setViewName("ftl/admin/" + info);
 
         return mv;
-    }
+    }*/
 }

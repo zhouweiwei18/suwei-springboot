@@ -64,7 +64,7 @@
         </a>
         <ul class="submenu">
             <li>
-                <a href="#">
+                <a href="#" dataUrl="${ctx.contextPath}/indexPage/index-item">
                     <i class="icon-double-angle-right"></i>
                     solr索引库维护
                 </a>

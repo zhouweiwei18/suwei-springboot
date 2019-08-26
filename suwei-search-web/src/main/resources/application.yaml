@@ -1,0 +1,10 @@
+#tomcat conf
+server:
+  port: 8083
+
+#dubbo conf
+dubbo:
+  application:
+    name: suwei-search-web
+  registry:
+    address: zookeeper://192.168.25.129:2181
