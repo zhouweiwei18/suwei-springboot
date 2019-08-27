@@ -1,4 +1,4 @@
-package com.mall.search.service.mapper;
+package com.mall.search.mapper;
 
 import com.mall.common.pojo.SearchItem;
 

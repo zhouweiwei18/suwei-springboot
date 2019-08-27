@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @Reference
+    @Reference(timeout = 120000)
     private ContentService contentService;
 
     @Value("${CONTENT_BANNER_ID}")

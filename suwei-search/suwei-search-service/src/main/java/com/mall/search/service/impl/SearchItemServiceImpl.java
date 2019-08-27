@@ -3,7 +3,7 @@ package com.mall.search.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.mall.common.pojo.SearchItem;
 import com.mall.common.pojo.SuWeiResult;
-import com.mall.search.service.mapper.SearchItemMapper;
+import com.mall.search.mapper.SearchItemMapper;
 import com.mall.search.service.SearchItemService;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.common.SolrInputDocument;

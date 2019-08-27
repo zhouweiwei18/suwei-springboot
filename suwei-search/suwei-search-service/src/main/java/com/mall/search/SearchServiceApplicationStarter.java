@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
  * @author weiwei
  * @create 2019-08-26 21:44
  */
-@MapperScan(value = {"com.mall.manager.mapper", "com.mall.search.service.mapper"})
+@MapperScan(value = {"com.mall.manager.mapper", "com.mall.search.mapper"})
 @SpringBootApplication
 public class SearchServiceApplicationStarter {
 

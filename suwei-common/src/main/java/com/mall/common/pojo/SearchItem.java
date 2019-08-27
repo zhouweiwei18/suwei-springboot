@@ -1,16 +1,19 @@
 package com.mall.common.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author weiwei
  * @create 2019-08-26 21:46
  */
-public class SearchItem {
+public class SearchItem implements Serializable {
     private String id;
     private String title;
     private String sell_point;
     private long price;
     private String image;
     private String category_name;
+    private String images;
 
     public String getId() {
         return id;
@@ -60,15 +63,16 @@ public class SearchItem {
         this.category_name = category_name;
     }
 
-    @Override
-    public String toString() {
-        return "SearchItem{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", sell_point='" + sell_point + '\'' +
-                ", price=" + price +
-                ", image='" + image + '\'' +
-                ", category_name='" + category_name + '\'' +
-                '}';
+    public String getImages() {
+        if (image != null && !"".equals(image)) {
+            String[] strings = image.split(",");
+            return strings[0];
+        }
+        return null;
     }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
 }
