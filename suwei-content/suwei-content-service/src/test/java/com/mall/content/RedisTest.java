@@ -30,8 +30,8 @@ public class RedisTest {
     @Test
     public void test(){
         stringRedisTemplate.opsForValue().set("abc","123");
-        Assert.assertEquals("123",stringRedisTemplate.opsForValue().get("abc"));
     }
+
     @Test
     public void test02(){
         String s = stringRedisTemplate.opsForValue().get("abc");

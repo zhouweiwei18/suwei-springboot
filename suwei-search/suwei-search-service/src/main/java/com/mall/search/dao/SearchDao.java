@@ -8,6 +8,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,9 +22,13 @@ public class SearchDao {
     @Autowired
     private SolrClient solrClient;
 
+    @Value("${DEFAULT_COLLECTION}")
+    private String DEFAULT_COLLECTION;//默认collection
+
     public SearchResult search(SolrQuery query) throws Exception {
+
         //根据查询条件查询索引库
-        QueryResponse queryResponse = solrClient.query(query);
+        QueryResponse queryResponse = solrClient.query(DEFAULT_COLLECTION,query);
         //取查询结果
         SolrDocumentList solrDocumentList = queryResponse.getResults();
         //取查询结果总记录数

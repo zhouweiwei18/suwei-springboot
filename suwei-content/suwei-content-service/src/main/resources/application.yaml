@@ -13,8 +13,25 @@ spring:
   redis:
     timeout: 5000
 # redis-single
-    host: 192.168.25.130
-    port: 6379
+#    host: 192.168.25.130
+#    port: 6379
+
+#redis-cluster
+    cluster:
+      max-redirects: 3
+      nodes:
+      - 192.168.25.130:7001
+      - 192.168.25.130:7002
+      - 192.168.25.130:7003
+      - 192.168.25.130:7004
+      - 192.168.25.130:7005
+      - 192.168.25.130:7006
+    lettuce:
+      pool:
+        max-active: 100
+        max-idle: 100
+        min-idle: 50
+        max-wait: 6000
 # redis-cluster
 #    cluster:
 #      max-redirects: 3
@@ -30,7 +47,7 @@ spring:
 #        max-active: 100
 #        max-idle: 100
 #        min-idle: 50
-#        max-wait: 6000
+#        max-wait: 60000
 
 #dubbo conf
 dubbo:

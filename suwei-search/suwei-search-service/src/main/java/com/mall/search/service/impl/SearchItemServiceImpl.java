@@ -5,9 +5,10 @@ import com.mall.common.pojo.SearchItem;
 import com.mall.common.pojo.SuWeiResult;
 import com.mall.search.mapper.SearchItemMapper;
 import com.mall.search.service.SearchItemService;
-import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
@@ -19,7 +20,11 @@ import java.util.List;
 public class SearchItemServiceImpl implements SearchItemService {
 
     @Autowired
-    private SolrClient solrClient;
+    private CloudSolrClient solrClient;
+    //private SolrClient solrClient;
+
+    @Value("${DEFAULT_COLLECTION}")
+    private String DEFAULT_COLLECTION;//默认collection
 
     @Autowired
     private SearchItemMapper itemMapper;
@@ -27,6 +32,8 @@ public class SearchItemServiceImpl implements SearchItemService {
     @Override
     public SuWeiResult importItems() {
         try {
+            //集群版设置默认collection
+            solrClient.setDefaultCollection(DEFAULT_COLLECTION);
             //查询商品列表
             List<SearchItem> itemList = itemMapper.getItemList();
             //导入索引库
@@ -47,7 +54,6 @@ public class SearchItemServiceImpl implements SearchItemService {
             solrClient.commit();
             //返回成功
             return SuWeiResult.ok();
-
         } catch (Exception e) {
             e.printStackTrace();
             return SuWeiResult.build(500, "商品导入失败");
