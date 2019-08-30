@@ -60,7 +60,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
-        <!--  启用JMS 的池化, 就一定要加上这个 jar-->
+        <!--  启用JMS的池化, 就一定要加上这个 jar-->
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-pool</artifactId>
