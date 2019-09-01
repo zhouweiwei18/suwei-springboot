@@ -2,6 +2,7 @@ package com.mall.manager.service;
 
 import com.mall.common.pojo.SuWeiResult;
 import com.mall.pojo.TbItem;
+import com.mall.pojo.TbItemDesc;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface TbItemService {
 
     //添加商品
     SuWeiResult addItem(TbItem item, String desc);
+
+    //根据商品id查询商品详情信息
+    TbItemDesc getItemDescById(Long itemId);
 }

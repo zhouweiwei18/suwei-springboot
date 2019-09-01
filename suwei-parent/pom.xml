@@ -16,6 +16,7 @@
         <module>../suwei-search</module>
         <module>../suwei-search-web</module>
         <module>../suwei-manager-web</module>
+        <module>../suwei-item-web</module>
     </modules>
 
     <!--定义SpringBoot依赖父工程-->

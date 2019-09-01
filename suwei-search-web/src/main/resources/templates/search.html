@@ -49,7 +49,7 @@
                 <li th:each="item : ${itemList}">
                     <div class="l-wrap">
                         <div class="pic">
-                            <a class="trackref" th:href="${item.images }" title=""
+                            <a class="trackref" th:href="|http://localhost:8084/item/${item.id}.html|" title=""
                                target="_blank">
                                 <img th:src="${item.images }" style="display:inline"/>
                             </a>

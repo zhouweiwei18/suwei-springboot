@@ -11,6 +11,8 @@ import com.mall.pojo.TbItemDesc;
 import com.mall.pojo.TbItemExample;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
 import javax.annotation.Resource;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author weiwei
@@ -35,20 +38,55 @@ public class TbItemServiceImpl implements TbItemService {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Value("${ITEM_INFO_KEY}")
+    private String ITEM_INFO_KEY;
+
+    @Value("${ITEM_INFO_BASE_KEY}")
+    private String ITEM_INFO_BASE_KEY;
+
+    @Value("${ITEM_INFO_DESC_KEY}")
+    private String ITEM_INFO_DESC_KEY;
+
+    @Value("${ITEM_INFO_EXPIRE}")
+    private Integer ITEM_INFO_EXPIRE;
+
 
     @Override
     public TbItem getItemById(Long itemId) {
 
+        // 查询缓存
+        try {
+            TbItem tbItem = (TbItem) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY);
+            if (tbItem != null) {
+                System.out.println("read redis item base information...");
+                return tbItem;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //根据主键查询
-        //TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
-        TbItemExample example = new TbItemExample();
+        TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
+        /*TbItemExample example = new TbItemExample();
         TbItemExample.Criteria criteria = example.createCriteria();
         //设置查询条件
         criteria.andIdEqualTo(itemId);
         //执行查询
-        List<TbItem> list = itemMapper.selectByExample(example);
-        if (list != null && list.size() > 0) {
-            return list.get(0);
+        List<TbItem> list = itemMapper.selectByExample(example);*/
+        if (tbItem != null) {
+            try {
+                // 把数据保存到缓存
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, tbItem);
+                // 设置缓存的有效期
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                System.out.println("write redis item base information...");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return tbItem;
         }
         return null;
     }
@@ -92,5 +130,34 @@ public class TbItemServiceImpl implements TbItemService {
 
         // 8、E3Result.ok()
         return SuWeiResult.ok();
+    }
+
+    @Override
+    public TbItemDesc getItemDescById(Long itemId) {
+        // 查询缓存
+        try {
+            TbItemDesc itemDesc = (TbItemDesc) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY);
+            if (itemDesc != null) {
+                System.out.println("read redis item desc information...");
+                return itemDesc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 查询数据库
+        TbItemDesc itemDesc = tbItemDescMapper.selectByPrimaryKey(itemId);
+        if (itemDesc != null) {
+            // 把数据保存到缓存
+            try {
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, itemDesc);
+                //设置过期时间
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                System.out.println("write redis item desc information...");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return itemDesc;
+        }
+        return null;
     }
 }
