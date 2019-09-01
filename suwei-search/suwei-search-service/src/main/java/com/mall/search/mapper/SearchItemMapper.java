@@ -10,4 +10,7 @@ import java.util.List;
  */
 public interface SearchItemMapper {
     List<SearchItem> getItemList();
+
+    //根据id查询商品(用于消息队列同步消息)
+    SearchItem getItemById(Long itemId);
 }

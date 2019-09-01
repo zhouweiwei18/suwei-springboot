@@ -10,6 +10,8 @@ import com.mall.pojo.TbItem;
 import com.mall.pojo.TbItemDesc;
 import com.mall.pojo.TbItemExample;
 import org.apache.activemq.command.ActiveMQTopic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsMessagingTemplate;
 
 import javax.annotation.Resource;
 
@@ -29,6 +31,9 @@ public class TbItemServiceImpl implements TbItemService {
 
     @Resource
     private TbItemDescMapper tbItemDescMapper;
+
+    @Autowired
+    private JmsMessagingTemplate jmsMessagingTemplate;
 
 
     @Override
@@ -80,7 +85,12 @@ public class TbItemServiceImpl implements TbItemService {
         itemDesc.setUpdated(date);
         // 6、向商品描述表插入数据
         tbItemDescMapper.insert(itemDesc);
-        // 7、E3Result.ok()
+
+        // 7、发送消息队列，通知新增商品id
+        ActiveMQTopic itemAddTopic = new ActiveMQTopic("itemAddTopic");
+        jmsMessagingTemplate.convertAndSend(itemAddTopic, item.getId());
+
+        // 8、E3Result.ok()
         return SuWeiResult.ok();
     }
 }
