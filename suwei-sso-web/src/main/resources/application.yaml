@@ -1,0 +1,9 @@
+#tomcat conf
+server:
+  port: 8085
+#dubbo conf
+dubbo:
+  application:
+    name: suwei-sso-web
+  registry:
+      address: zookeeper://192.168.25.129:2181
