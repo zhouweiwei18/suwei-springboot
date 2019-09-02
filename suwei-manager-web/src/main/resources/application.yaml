@@ -6,6 +6,7 @@ server:
 dubbo:
   application:
     name: suwei-manager-web
+    timeout: 1200000
     qos-port: 22222
     qos-accept-foreign-ip: false
     qos-enable: true
