@@ -1,0 +1,9 @@
+#tomcat conf
+server:
+  port: 8086
+#dubbo conf
+dubbo:
+  application:
+    name: suwei-cart-web
+  registry:
+      address: zookeeper://192.168.25.129:2181

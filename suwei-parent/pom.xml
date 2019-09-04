@@ -19,6 +19,8 @@
         <module>../suwei-item-web</module>
         <module>../suwei-sso</module>
         <module>../suwei-sso-web</module>
+        <module>../suwei-cart</module>
+        <module>../suwei-cart-web</module>
     </modules>
 
     <!--定义SpringBoot依赖父工程-->
